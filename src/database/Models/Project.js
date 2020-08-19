@@ -1,34 +1,26 @@
-const Sequelize = require('sequelize');
-const connection = require('../connection');
+const mongoose = require('mongoose');
 
-const Project = connection.define('projects', {
-    id: {
-        type: Sequelize.STRING,
-        primaryKey: true,
-        allowNull: false,
-    },
+const Project = mongoose.Schema({
     title: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: String,
+        required: true
     },
     summary: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: String,
+        required: true
     },
     description: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: String,
+        required: true
     },
     source_code: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: String,
+        required: true
     },
     image: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: String,
+        required: true
     }
 });
 
-Project.sync({force: false});
-
-module.exports = Project;
+mongoose.model('projects', Project);
