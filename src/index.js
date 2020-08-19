@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+require('dotenv').config();
+
 const path = require('path');
 
 const mongoose = require('mongoose');
@@ -10,7 +12,7 @@ const cors = require('cors');
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://diego_rocha:rocha030604@cluster0.ak5sr.mongodb.net/portfolio?retryWrites=true&w=majority", {
+mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -24,7 +26,7 @@ app.use(express.json());
 app.use(routes);
 
 
-const PORT = 3333;
+const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => {
     console.log('Server running on port ' + PORT);
 });
