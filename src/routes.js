@@ -36,12 +36,21 @@ const transporter = nodemailer.createTransport({
 routes.post('/sendmail', (req, res) => {
     const { name, replyTo, subject, text } = req.body;
 
+    const fullText = `
+        Nome: ${name}
+        Email: ${replyTo}
+
+        Assunto:
+
+        ${text}
+    `;
+
     transporter.sendMail({
         from: `${name} <${process.env.EMAIL_SENDER_EMAIL}>`,
         to: process.env.RECEVER_EMAIL,
         replyTo,
         subject,
-        text,
+        text: fullText,
     }, function(err, info) {
         if (err) return res.json({ok: false, err})
 
