@@ -97,4 +97,8 @@ routes.delete('/projects/:id', (req, res) => {
         }).catch(error => res.json({error}));
 });
 
+routes.get('/', (req, res) => {
+    res.send('você está acessando a api...');
+})
+
 module.exports = routes;
