@@ -12,7 +12,7 @@ const cors = require('cors');
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect(`${process.env.MONGODB_URL}`, {
+mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
