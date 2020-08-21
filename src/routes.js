@@ -77,10 +77,10 @@ routes.get('/projects/:id', (req, res) => {
 });
 
 routes.post('/projects', upload.single('image'), async (req, res) => {
-    const { title, summary, description, source_code } = req.body;
-    const { path } = req.file;
+    const { title, summary, description, source_code, image } = req.body;
+    // const { path } = req.file;
     
-    if (title === undefined || summary === undefined || description === undefined || source_code === undefined || path === undefined) {
+    if (title === undefined || summary === undefined || description === undefined || source_code === undefined || image === undefined) {
         return res.status(400).json({message: 'Something is undefined'});
     }
     
@@ -89,7 +89,8 @@ routes.post('/projects', upload.single('image'), async (req, res) => {
         summary, 
         description, 
         source_code,
-        image: `${process.env.APP_URL}${path}`
+        image
+        // image: `${process.env.APP_URL}${path}`
     }).save().then(() => {
         return res.status(201).json({ message: 'Project created successfully' });
     }).catch(err => {
